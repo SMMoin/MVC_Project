@@ -1,0 +1,59 @@
+﻿@model MvcProject_Moin.ViewModels.StuffVM
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutForAdmin.cshtml";
+
+}
+
+<h2>Delete</h2>
+
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Stuff</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StuffName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StuffName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CellPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CellPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactAddress)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

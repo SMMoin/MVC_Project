@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassName" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="CommitteMembers">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" />
+    <Property Name="Age" Type="int" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="ExamDetails">
+    <Key>
+      <PropertyRef Name="ExamDetailsID" />
+    </Key>
+    <Property Name="ExamDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExamName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="ExamDate" Type="date" Nullable="false" />
+    <Property Name="ResultPublishDate" Type="date" Nullable="false" />
+    <Property Name="MCQ" Type="int" Nullable="false" />
+    <Property Name="Descriptive" Type="int" Nullable="false" />
+    <Property Name="Evidence" Type="int" Nullable="false" />
+    <Property Name="Total" Type="int" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentName" Type="varchar" MaxLength="30" />
+    <Property Name="FatherName" Type="varchar" MaxLength="30" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="15" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="20" />
+    <Property Name="ClassID" Type="int" />
+  </EntityType>
+  <EntityType Name="Stuffs">
+    <Key>
+      <PropertyRef Name="StuffID" />
+    </Key>
+    <Property Name="StuffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StuffName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CellPhone" Type="nvarchar(max)" />
+    <Property Name="ContactAddress" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="20" />
+    <Property Name="Designation" Type="varchar" MaxLength="50" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="20" />
+    <Property Name="ImagePath" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK__ExamDetai__Stude__6FE99F9F">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="ExamDetails" Type="Self.ExamDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="ExamDetails">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__ClassID__38996AB5">
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommitteMembers" EntityType="Self.CommitteMembers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExamDetails" EntityType="Self.ExamDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stuffs" EntityType="Self.Stuffs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__ExamDetai__Stude__6FE99F9F" Association="Self.FK__ExamDetai__Stude__6FE99F9F">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="ExamDetails" EntitySet="ExamDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__ClassID__38996AB5" Association="Self.FK__Student__ClassID__38996AB5">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

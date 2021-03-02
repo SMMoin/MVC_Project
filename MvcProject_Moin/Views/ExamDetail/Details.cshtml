@@ -1,0 +1,83 @@
+﻿@model MvcProject_Moin.Models.ExamDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ExamDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ExamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExamDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExamDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResultPublishDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResultPublishDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MCQ)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MCQ)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descriptive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descriptive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Evidence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evidence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.StudentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.StudentName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExamDetailsID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

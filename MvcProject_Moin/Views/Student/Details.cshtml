@@ -1,0 +1,146 @@
+﻿@model MvcProject_Moin.Models.Student
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#examInfo").click(function () {
+            $.ajax({
+                url: "@Url.Action("ExamDetails", "Student", new { id=Model.StudentID})",
+                type: "get",
+                dataType: "json",
+                success: function (result) {
+                    $("#examdisplay table tbody").empty;
+                    for (var i = 0; i < result.length; i++) {
+                        $("#examdisplay table tbody").append("<tr><td>" + result[i].examName + "</td><td>" + result[i].examDate + "</td><td>" + result[i].resultDate + "</td><td>" + result[i].totalMarks + "</td></tr>");
+                    }
+                    $("#examdisplay").show();
+                }
+            });
+            this.disabled = true;
+        })
+    })
+</script>
+
+<h2>Details</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <fieldset>
+                <legend>Student Information</legend>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StudentName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StudentName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FatherName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FatherName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DOB)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DOB)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ContactNo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ContactNo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Class.ClassName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Class.ClassName)
+                    </dd>
+
+                </dl>
+            </fieldset>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <button class="btn btn-info" id="examInfo" data-exam-id="@Model.StudentID">Exam Details</button>
+            </div>
+            <div id="examdisplay" style="display:none">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>Exam Name</tr>
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        <tr>Exam Date</tr>
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        <tr>Result Date</tr>
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+                        &nbsp;  &nbsp;&nbsp;  &nbsp;
+
+                        <tr>Total Marks</tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

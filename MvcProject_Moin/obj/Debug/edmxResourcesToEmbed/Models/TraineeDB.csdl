@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Students" Relationship="Self.FK__Student__ClassID__38996AB5" FromRole="Class" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="FatherName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="DOB" Type="DateTime" Precision="0" />
+    <Property Name="ContactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ClassID" Type="Int32" />
+    <NavigationProperty Name="Class" Relationship="Self.FK__Student__ClassID__38996AB5" FromRole="Student" ToRole="Class" />
+    <NavigationProperty Name="ExamDetails" Relationship="Model.FK__ExamDetai__Stude__6FE99F9F" FromRole="Student" ToRole="ExamDetail" />
+  </EntityType>
+  <Association Name="FK__Student__ClassID__38996AB5">
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Classes" EntityType="Self.Class" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <AssociationSet Name="FK__Student__ClassID__38996AB5" Association="Self.FK__Student__ClassID__38996AB5">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
+    <EntitySet Name="Teachers" EntityType="Model.Teacher" />
+    <EntitySet Name="Stuffs" EntityType="Model.Stuff" />
+    <EntitySet Name="ExamDetails" EntityType="Model.ExamDetail" />
+    <AssociationSet Name="FK__ExamDetai__Stude__6FE99F9F" Association="Model.FK__ExamDetai__Stude__6FE99F9F">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="ExamDetail" EntitySet="ExamDetails" />
+    </AssociationSet>
+    <EntitySet Name="CommitteMembers" EntityType="Model.CommitteMember" />
+  </EntityContainer>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherID" />
+    </Key>
+    <Property Name="TeacherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Stuff">
+    <Key>
+      <PropertyRef Name="StuffID" />
+    </Key>
+    <Property Name="StuffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StuffName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CellPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ExamDetail">
+    <Key>
+      <PropertyRef Name="ExamDetailsID" />
+    </Key>
+    <Property Name="ExamDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExamName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StudentID" Type="Int32" />
+    <Property Name="ExamDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ResultPublishDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="MCQ" Type="Int32" Nullable="false" />
+    <Property Name="Descriptive" Type="Int32" Nullable="false" />
+    <Property Name="Evidence" Type="Int32" Nullable="false" />
+    <Property Name="Total" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <NavigationProperty Name="Student" Relationship="Model.FK__ExamDetai__Stude__6FE99F9F" FromRole="ExamDetail" ToRole="Student" />
+  </EntityType>
+  <Association Name="FK__ExamDetai__Stude__6FE99F9F">
+    <End Type="Model.Student" Role="Student" Multiplicity="0..1" />
+    <End Type="Model.ExamDetail" Role="ExamDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="ExamDetail">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CommitteMember">
+    <Key>
+      <PropertyRef Name="MemberID" />
+    </Key>
+    <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

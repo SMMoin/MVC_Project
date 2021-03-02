@@ -1,0 +1,51 @@
+﻿@model MvcProject_Moin.ViewModels.StuffVM
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutForAdmin.cshtml";
+
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Stuff</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StuffName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StuffName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CellPhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CellPhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactAddress)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StuffID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
